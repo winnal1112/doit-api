@@ -1,0 +1,31 @@
+jdbc:
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://172.0.0.1:3306/doit_db
+  username: root
+  password: Winnal951112..
+#引入其他yml配置文件
+spring:
+  profiles:
+    active: test1,test2
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/doit_db?serverTimezone=UTC
+    username: root
+    password: Winnal951112..
+#Tomcat端口
+server:
+  port: 8081
+#日志记录级别
+logging:
+  level:
+    pers.doit: debug
+    org.springframework: info
+#mybatis
+mybatis:
+  #实体类别名包路劲
+  type-aliases-package: pers.doit.pojo
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 开启实体类与db的驼峰名转换
+    map-underscore-to-camel-case: true
