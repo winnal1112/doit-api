@@ -10,7 +10,7 @@ public class Member {
     private String memberName;
     private String address;
     private String phoneNum;
-    private Integer level;
+    private Integer grade;
     private Double money;
     private Integer payType;
     private Date birthday;
@@ -48,12 +48,12 @@ public class Member {
         this.phoneNum = phoneNum;
     }
 
-    public Integer getLevel() {
-        return level;
+    public Integer getGrade() {
+        return grade;
     }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setGrade(Integer grade) {
+        this.grade = grade;
     }
 
     public Double getMoney() {

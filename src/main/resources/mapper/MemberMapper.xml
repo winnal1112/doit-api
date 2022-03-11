@@ -2,8 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="pers.doit.mapper.MemberMapper">
 
-    <select id="getMemberList" parameterType="String" resultType="pers.doit.pojo.Member">
-        SELECT * FROM member
+    <select id="getMemberList" parameterType="pers.doit.pojo.MemberSearchParams" resultMap="member">
+        SELECT
+            member_id,
+            member_name,
+            address,
+            phone_num,
+            grade,
+            money,
+            pay_type,
+            birthday,
+            integral
+        FROM member AS m
+        WHERE 1=1
+        <if test="memberId != null">
+            and m.member_id like CONCAT('%',#{memberId},'%')
+        </if>
+        <if test="memberName != null">
+            and m.member_name like CONCAT('%',#{memberName},'%')
+        </if>
+        <if test="payType != null">
+            and m.pay_type like CONCAT('%',#{payType},'%')
+        </if>
+        LIMIT #{offset},#{limit}
     </select>
 
+    <select id="getMemberTotalCount" parameterType="pers.doit.pojo.MemberSearchParams" resultType="java.lang.Integer">
+        SELECT
+            count(*)
+        FROM member AS m
+        WHERE 1=1
+        <if test="memberId != null">
+            and m.member_id like CONCAT('%',#{memberId},'%')
+        </if>
+        <if test="memberName != null">
+            and m.member_name like CONCAT('%',#{memberName},'%')
+        </if>
+        <if test="payType != null">
+            and m.pay_type like CONCAT('%',#{payType},'%')
+        </if>
+    </select>
+
+    <resultMap id="member" type="pers.doit.pojo.Member">
+        <result property="memberId" column="member_id"></result>
+        <result property="memberName" column="member_name"></result>
+        <result property="address" column="address"></result>
+        <result property="phoneNum" column="phone_num"></result>
+        <result property="grade" column="grade"></result>
+        <result property="money" column="money"></result>
+        <result property="payType" column="pay_type"></result>
+        <result property="birthday" column="birthday"></result>
+        <result property="integral" column="integral"></result>
+    </resultMap>
 </mapper>

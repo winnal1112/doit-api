@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.doit.mapper.MemberMapper;
 import pers.doit.pojo.Member;
+import pers.doit.pojo.MemberSearchParams;
 import pers.doit.service.MemberService;
 
 import java.util.List;
@@ -15,7 +16,12 @@ public class MemberServiceImpl implements MemberService {
     private MemberMapper memberMapper;
 
     @Override
-    public List<Member> getMemberList() {
-        return memberMapper.getMemberList();
+    public List<Member> getMemberList(MemberSearchParams params) {
+        return memberMapper.getMemberList(params);
+    }
+
+    @Override
+    public Integer getMemberTotalCount(MemberSearchParams params) {
+        return memberMapper.getMemberTotalCount(params);
     }
 }
